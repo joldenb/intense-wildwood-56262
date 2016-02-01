@@ -1,6 +1,7 @@
 // dependencies
 var fs = require('fs');
 var express = require('express');
+var SessionStore = require('session-mongoose')(express);
 var routes = require('./routes');
 var path = require('path');
 var config = require('./oauth.js');
@@ -51,7 +52,15 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'my_precious' }));
+  app.use(
+  express.session({
+    store: new SessionStore({
+    url: 'mongodb://localhost/session',
+    interval: 1200000
+  }),
+  cookie: { maxAge: 1200000 },
+  secret: 'my secret'
+	}));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
