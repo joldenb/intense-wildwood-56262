@@ -17,4 +17,3 @@
 
 ![mobile2](https://raw.github.com/mjhea0/node-bootstrap3-template/master/screenshots/mobile2.png)
 
-
