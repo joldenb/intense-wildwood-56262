@@ -7,10 +7,6 @@ var config = require('./oauth.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var TwitterStrategy = require('passport-twitter').Strategy;
-var GithubStrategy = require('passport-github2').Strategy;
-var GoogleStrategy = require('passport-google-oauth2').Strategy;
-var InstagramStrategy = require('passport-instagram').Strategy;
 
 
 // serialize and deserialize
@@ -78,44 +74,6 @@ app.get('/auth/facebook/callback',
     res.redirect('/account');
   });
 
-app.get('/auth/twitter',
-  passport.authenticate('twitter'),
-  function(req, res){});
-app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/account');
-  });
-
-app.get('/auth/github',
-  passport.authenticate('github'),
-  function(req, res){});
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/account');
-  });
-
-app.get('/auth/google',
-  passport.authenticate('google', { scope: [
-    'https://www.googleapis.com/auth/plus.login',
-    'https://www.googleapis.com/auth/plus.profile.emails.read'
-  ] }
-));
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/account');
-  });
-
-app.get('/auth/instagram',
-  passport.authenticate('instagram'),
-  function(req, res){});
-app.get('/auth/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/account');
-  });
 
 app.get('/logout', function(req, res){
   req.logout();
